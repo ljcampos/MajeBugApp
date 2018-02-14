@@ -1,0 +1,41 @@
+<!-- <p>
+  {{ bugs | json }}
+</p> -->
+
+
+<!-- <div>
+  <ul *ngFor="let bug of bugs">
+    <li><a href="#">{{ bug.title }}</a></li>
+  </ul>
+</div> -->
+<h1>
+  <span>Bugs</span>
+  <a class="ui button green" [routerLink]="['/addBug/']">+ New bug</a>
+</h1>
+
+
+<table class="ui celled striped table">
+    <thead style="text-align:center;">
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Severity</th>
+        <th>Fixed</th>
+        <th>Created</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let bug of bugs" style="text-align:center;">
+      <tr>
+        <td class="collapsing">{{ bug.id }}</td>
+        <td class="collapsing"><a [routerLink]="['/bugs/',bug.id]">{{ bug.title | uppercase }}</a></td>
+        <td class="collapsing"><i class="large icon" [ngClass]="{'green checkmark':bug.isFixed, 'red remove': !bug.isFixed}"></i></td>
+        <td class="collapsing"> <app-severity [severityRange]=bug.severity></app-severity></td>
+        <td class="collapsing">{{ bug.createdAt | fromnow }}</td>
+        <td class="collapsing">
+          <a class="ui button blue" [routerLink]="['/editBug/',bug.id]">Edit</a>
+          <!-- <button class="ui button red">Delete</button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>

@@ -1,0 +1,9 @@
+.normal {
+    color: green;
+}
+.critical {
+    color: yellow;
+}
+.fatal  {
+    color: red;
+}

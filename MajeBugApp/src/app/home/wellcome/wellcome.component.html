@@ -1,0 +1,32 @@
+<img [ngStyle]="{'width.px': imgSize}" src="{{model.photo}}" alt="">
+<p>
+  wellcome works! <b>{{ model.name }}</b> <b>{{ model.lastName }}</b>
+</p>
+
+<div class="ui input">
+  <input type="text" [(ngModel)]="model.name">
+  <input type="text" [(ngModel)]="model.lastName">
+  <input type="checkbox" [(ngModel)]="model.gender">
+</div>
+
+<button class="ui button" (click)="clicked()">click me!</button>
+
+<div [ngClass]="{'true-option': model.gender, 'false-option': !model.gender}">
+  <div *ngIf="model.gender">Text to show</div>
+  <div *ngIf="!model.gender">Text to show 2</div>
+</div>
+
+<button class="ui button primary" (click)="addItem()">add</button>
+<button class="ui button secondary" (click)="removeItem()">remove</button>
+
+<!-- <div > -->
+  <ul class="ui celled ordered list" *ngFor="let item of items">
+    <li class="item" (click)="selectedItem(item)">
+      <strong>{{ item }}</strong>
+    </li>
+  </ul>
+<!-- </div> -->
+
+<pre>
+  {{ model | json }}
+</pre>

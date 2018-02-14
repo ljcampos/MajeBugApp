@@ -1,0 +1,36 @@
+<h1 style="padding:0 .5em;">
+  <a [routerLink]="['/bugs']"><i class="arrow circle left icon"></i></a>
+  <strong>{{ bug.title }}</strong>
+</h1>
+<div style="padding:0 1.5em;">
+  <strong> Severity </strong>
+  <span><app-severity [severityRange]=bug.severity></app-severity></span>
+  <strong> | </strong>
+
+  <strong> Fixed </strong>
+  <span>
+    <i class="large icon" [ngClass]="{'green checkmark':bug.isFixed, 'red remove': !bug.isFixed}"></i>
+  </span>
+  <strong> | </strong>
+
+  <strong><i style="color: #24BAEF;" class="add to calendar icon"></i> Created </strong>
+  <span>{{ bug.createdAt | date }}</span>
+
+  <hr>
+</div>
+
+<p style="padding:1.5em;">{{ bug.body }}</p>
+
+<!-- if, else, combined with ngTemplates -->
+<div *ngIf="bug.createdBy;then content else anotherContent"></div>
+
+<ng-template #content>
+  content here
+</ng-template>
+<ng-template #anotherContent>
+  AnotherContent here
+</ng-template>
+
+<!-- <pre>
+    {{ bug | json}}
+</pre> -->

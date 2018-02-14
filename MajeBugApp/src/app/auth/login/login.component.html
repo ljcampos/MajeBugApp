@@ -1,0 +1,43 @@
+<div class="ui middle aligned center aligned grid" style="height: 100%; margin: 0;">
+  <div class="column">
+    <h2 class="ui teal image header">
+      <!-- <img src="https://semantic-ui.com/examples/assets/images/logo.png" class="image"> -->
+      <div class="content">
+        Log-in to your account
+      </div>
+    </h2>
+    <form class="ui large form" novalidate (ngSubmit)="submitForm(loginForm)" #loginForm="ngForm">
+      <div class="ui stacked segment">
+        <div class="field" [ngClass]="{'error' : emailVar.touched && emailVar.invalid}">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="email" placeholder="E-mail address" [(ngModel)]="model.email" #emailVar="ngModel" required email>
+          </div>
+        </div>
+        <div class="field"  [ngClass]="{'error' : passwordVar.touched && passwordVar.invalid}" required>
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password" [(ngModel)]="model.password" #passwordVar="ngModel" required>
+          </div>
+        </div>
+        <button [ngClass]="{'loading':isLoading}" class="ui fluid large teal submit button" [disabled]="!loginForm.valid">Login</button>
+      </div>
+
+      <div class="ui negative message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+        <!-- <pre>
+            emailVar.touched {{ emailVar.touched }}
+            emailVar.dirty {{ emailVar.dirty }}
+            emailVar.valid {{ emailVar.valid }}
+            emailVar.invalid {{ emailVar.invalid }}
+          {{ model | json}}
+        </pre> -->
+    </form>
+
+    <div class="ui message">
+      New to us? <a href="#">Sign Up</a>
+    </div>
+  </div>
+</div>

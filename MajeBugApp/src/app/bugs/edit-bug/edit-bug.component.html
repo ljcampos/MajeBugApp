@@ -1,0 +1,55 @@
+<h1>
+  <span>Edit </span> <!-- <span style="color:#fff;">{{ bug.title }}</span> -->
+</h1>
+
+<form novalidate (ngSubmit)="save()"  [formGroup]="editBugForm" class="ui form" style="padding: 1.5em;">
+    
+  <input type="hidden" placeholder="" formControlName="id">
+  
+  <div class="field" [ngClass]="{'error' : editBugForm.get('title').touched && editBugForm.get('title').invalid}">
+      <label>Title ({{ 120 - editBugForm.get('title').value.length }})</label>
+      <input type="text" placeholder="title name" formControlName="title">
+  </div>
+  <div class="ui pointing red basic label" *ngIf="editBugForm.get('title').touched && editBugForm.get('title').errors && editBugForm.get('title').errors.maxlength">
+    max length reached
+  </div>
+
+  <div class="field" [ngClass]="{'error' : editBugForm.get('body').touched && editBugForm.get('body').invalid}">
+      <label>Body ({{ 500 -editBugForm.get('body').value.length }})</label>
+      <textarea name="" id="" cols="30" rows="5" placeholder="body description..." formControlName="body"></textarea>
+  </div>
+
+  <div class="field" [ngClass]="{'error' : editBugForm.get('stepToReproduce').touched && editBugForm.get('stepToReproduce').invalid}">
+      <label>Step to reproduce ({{ 250 - editBugForm.get('stepToReproduce').value.length }})</label>
+      <textarea name="" id="" cols="30" rows="5" placeholder="step to reproduce..." formControlName="stepToReproduce"></textarea>
+  </div>
+  <div class="ui pointing red basic label" *ngIf="editBugForm.get('stepToReproduce').touched && editBugForm.get('stepToReproduce').errors && editBugForm.get('stepToReproduce').errors.maxlength">
+    max length reached
+  </div>
+
+  <div class="field">
+      <label>Severity</label>
+      <select class="ui dropdown" formControlName="severity">
+        <option value="">Select</option>
+        <option value="1"><i class="circle large icon normal"></i> Normal</option>
+        <option value="2"><i class="circle large icon critical"></i> Critical</option>
+        <option value="3"><i class="circle large icon fatal"></i> Fatal</option>
+      </select>
+  </div>
+
+  <div class="ui toggle checkbox field">
+      <input type="checkbox" formControlName="isFixed">
+      <label>Is fixed</label>
+  </div>
+
+  <div class="field" style="text-align:center;">
+    <a class="ui button red" [routerLink]="['/bugs']">Cancel</a>
+    <button class="ui button green" type="submit" [disabled]="editBugForm.invalid">Save</button>
+  </div>
+
+</form>
+
+
+<pre>
+  {{ editBugForm.value | json }}
+</pre>

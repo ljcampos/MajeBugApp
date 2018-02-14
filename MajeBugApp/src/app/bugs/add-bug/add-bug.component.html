@@ -1,0 +1,56 @@
+<h1>
+  <!-- <a [routerLink]="['/bugs']"><i class="arrow circle left icon"></i></a> -->
+  <span>Add bug </span>
+</h1>
+
+<form novalidate (ngSubmit)="save()" [formGroup]="addBugForm" class="ui form" style="padding: 1.5em;">
+  <div class="field" [ngClass]="{'error' : addBugForm.get('title').touched && addBugForm.get('title').invalid}">
+      <label>Title ({{ 120 - addBugForm.get('title').value.length }})</label>
+      <input type="text" placeholder="title name" formControlName="title">
+  </div>
+  <div class="ui pointing red basic label" *ngIf="addBugForm.get('title').touched && addBugForm.get('title').errors && addBugForm.get('title').errors.maxlength">
+    max length reached
+  </div>
+
+  <div class="field" [ngClass]="{'error' : addBugForm.get('body').touched && addBugForm.get('body').invalid}">
+      <label>Body ({{ 500 -addBugForm.get('body').value.length }})</label>
+      <textarea name="" id="" cols="30" rows="5" placeholder="body description..." formControlName="body"></textarea>
+  </div>
+
+  <div class="field" [ngClass]="{'error' : addBugForm.get('stepToReproduce').touched && addBugForm.get('stepToReproduce').invalid}">
+      <label>Step to reproduce ({{ 250 -addBugForm.get('stepToReproduce').value.length }})</label>
+      <textarea name="" id="" cols="30" rows="5" placeholder="step to reproduce..." formControlName="stepToReproduce"></textarea>
+  </div>
+  <div class="ui pointing red basic label" *ngIf="addBugForm.get('stepToReproduce').touched && addBugForm.get('stepToReproduce').errors && addBugForm.get('stepToReproduce').errors.maxlength">
+    max length reached
+  </div>
+
+  <div class="field">
+      <label>Severity</label>
+      <!-- <select name="" id="">
+        <option value="1">Normal</option>
+        <option value="2">Criticcal</option>
+        <option value="3">Fatal</option>
+      </select> -->
+      <select class="ui dropdown" formControlName="severity">
+        <option value="">Select</option>
+        <option value="1"><i class="circle large icon normal"></i> Normal</option>
+        <option value="2"><i class="circle large icon critical"></i> Critical</option>
+        <option value="3"><i class="circle large icon fatal"></i> Fatal</option>
+      </select>
+  </div>
+
+  <div class="ui toggle checkbox field">
+      <input type="checkbox" formControlName="isFixed">
+      <label>Is fixed</label>
+  </div>
+
+  <div class="field" style="text-align:center;">
+    <a class="ui button red" [routerLink]="['/bugs']">Cancel</a>
+    <button class="ui button green" type="submit" [disabled]="addBugForm.invalid">Save</button>
+  </div>
+
+  <pre>
+    {{ addBugForm.value | json }}
+  </pre>
+</form>
